@@ -28,26 +28,13 @@ public class Cadastro_de_trecos {
 
         // Executa um método conforme a opção escolhida.
         switch (option) {
-            case "0":
-                exitProgram();
-                break;
-            case "1":
-                listAll();
-                break;
-            case "2":
-                listOne();
-                break;
-            case "3":
-                newThing();
-                break;
-            case "4":
-                editThing();
-                break;
-            case "5":
-                deleteThing();
-                break;
-            default:
-                reloadMenu();
+            case "0" -> exitProgram();
+            case "1" -> listAll();
+            case "2" -> listOne();
+            case "3" -> newThing();
+            case "4" -> editThing();
+            case "5" -> deleteThing();
+            default -> reloadMenu();
         }
     }
 
