@@ -7,12 +7,12 @@ public class Cadastro_de_trecos {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        clearScreen();
         mainMenu();
     }
 
     // Método que exibe o menu principal.
     public static void mainMenu() {
-        clearScreen();
         System.out.println("Cadastro de Trecos\n");
         System.out.println("Menu:");
         System.out.println("\t[1] Listar todos");
