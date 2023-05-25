@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS things;
 
 CREATE TABLE things (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(63),
     description VARCHAR(127)
 );
