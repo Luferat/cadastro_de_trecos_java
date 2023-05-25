@@ -47,9 +47,11 @@ public class Cadastro_de_trecos {
                 exitProgram();
                 break;
             case "1":
+                clearScreen();
                 listAll();
                 break;
             case "2":
+                clearScreen();
                 listOne();
                 break;
             case "3":
@@ -85,7 +87,6 @@ public class Cadastro_de_trecos {
             res = stmt.executeQuery(sql);        // Executa a query.
 
             // Prepara interface (view).
-            clearScreen();
             System.out.println(appName + "\n" + line);
             System.out.println("Listando todos os trecos");
             System.out.println(line);
@@ -135,9 +136,82 @@ public class Cadastro_de_trecos {
 
     // Lista um treco específico pelo Id.
     public static void listOne() {
-    }
 
+        int id = 0;
+
+        try {
+            System.out.println(appName + "\n" + line);
+            System.out.println("Listando um treco pelo Id");
+            System.out.println(line);
+            System.out.print("ID do treco ou [0] para voltar ao menu: ");
+
+            try {
+                id = Integer.parseInt(scanner.next());
+                if (id == 0) {
+                    clearScreen();
+                    mainMenu();
+                }
+            } catch (NumberFormatException error) {
+                clearScreen();
+                System.out.println("Oooops! Opção inválida!\n");
+                listOne();
+            }
+
+            String sql = "SELECT * FROM things WHERE id = ?";
+            conn = DbConnection.dbConnect();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, id);
+            res = pstm.executeQuery();
+
+            if (!res.next()) {
+                clearScreen();
+                System.out.println("Ooops! Não encontrei!\n");
+                listOne();
+            } else {
+                do {
+                    System.out.println(
+                            "\nID: " + res.getString("id") + "\n"
+                            + "  Nome: " + res.getString("name") + "\n"
+                            + "  Descrição: " + res.getString("description") + "\n"
+                    );
+                } while (res.next());
+            }
+
+            // Fecha conexões abertas.
+            DbConnection.dbClose(conn, stmt, pstm, res);
+
+            // Menu da seção.
+            System.out.println(line);
+            System.out.println("Menu:\n\t[1] Menu principal\t[2] Listar\n\t[0] Sair");
+            System.out.println(line);
+            System.out.print("Opção: ");
+            String option = scanner.next();
+
+            // Executa método conforme opção escolhida.
+            switch (option) {
+                case "0":
+                    exitProgram();
+                    break;
+                case "1":
+                    clearScreen();
+                    mainMenu();
+                    break;
+                case "2":
+                    clearScreen();
+                    listOne();
+                    break;
+                default:
+                    reloadMenu();
+                    break;
+            }
+
+        } catch (SQLException error) {
+            System.out.println("Oooops! " + error.getMessage());
+            System.exit(0);
+        }
+    }
     // Cadastra um novo treco.
+
     public static void newThing() {
     }
 
