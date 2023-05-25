@@ -4,48 +4,66 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.Scanner;
 
 public class Cadastro_de_trecos {
 
-    static Scanner scanner = new Scanner(System.in);
+    // Objeto que obtém dados do teclado.
+    private static Scanner scanner = new Scanner(System.in);
 
+    // Atributos para uso com banco de dados.
+    private static Connection conn = null;
+    private static Statement stmt = null;
+    private static PreparedStatement pstm = null;
+    private static ResultSet res = null;
+
+    // Views.
+    private static String appName = "CADASTRO DE TRECOS";
+    private static String line = "------------------------------------------------";
+
+    // Método principal.
     public static void main(String[] args) {
         clearScreen();
         mainMenu();
     }
 
-    // Método que exibe o menu principal.
+    // Exibe o menu principal.
     public static void mainMenu() {
-        System.out.println("Cadastro de Trecos\n");
+        System.out.println(appName + "\n" + line);
         System.out.println("Menu:");
-        System.out.println("\t[1] Listar todos");
-        System.out.println("\t[2] Listar");
-        System.out.println("\t[3] Novo");
-        System.out.println("\t[4] Editar");
-        System.out.println("\t[5] Apagar");
-        System.out.println("\t[0] Sair");
-        System.out.print("\nOpção: ");
+        System.out.println("\t[1] Listar todos\t[4] Editar");
+        System.out.println("\t[2] Listar\t\t[5] Apagar");
+        System.out.println("\t[3] Novo\t\t[0] Sair");
+        System.out.println(line + line);
+        System.out.print("Opção: ");
 
         // Recebe a opção do teclado.
         String option = scanner.next();
 
         // Executa um método conforme a opção escolhida.
         switch (option) {
-            case "0" ->
+            case "0":
                 exitProgram();
-            case "1" ->
+                break;
+            case "1":
                 listAll();
-            case "2" ->
+                break;
+            case "2":
                 listOne();
-            case "3" ->
+                break;
+            case "3":
                 newThing();
-            case "4" ->
+                break;
+            case "4":
                 editThing();
-            case "5" ->
+                break;
+            case "5":
                 deleteThing();
-            default ->
+                break;
+            default:
                 reloadMenu();
+                break;
         }
     }
 
@@ -57,45 +75,58 @@ public class Cadastro_de_trecos {
         System.exit(0);
     }
 
-    // Lista todos os trecos cadastrados.
+    // Lista todos os registros cadastrados.
     public static void listAll() {
 
         try {
-            String sql = "SELECT * FROM things";
-            Connection conn = DbConnection.dbConnect();
-            Statement stmt = conn.createStatement();
-            ResultSet res = stmt.executeQuery(sql);
+            String sql = "SELECT * FROM things"; // Query proposta.
+            conn = DbConnection.dbConnect();     // Abra conexão.
+            stmt = conn.createStatement();       // Inicia estado da conexão.
+            res = stmt.executeQuery(sql);        // Executa a query.
 
+            // Prepara interface (view).
+            clearScreen();
+            System.out.println(appName + "\n" + line);
+            System.out.println("Listando todos os trecos");
+            System.out.println(line);
             System.out.println(" ");
+
+            // Loop que obtém cada registro, formata e exibe.
             while (res.next()) {
                 System.out.println(
                         "ID: " + res.getString("id") + "\n"
-                        + "Nome: " + res.getString("name") + "\n"
-                        + "Descrição: " + res.getString("description") + "\n"
+                        + "  Nome: " + res.getString("name") + "\n"
+                        + "  Descrição: " + res.getString("description") + "\n"
                 );
             }
 
-            conn.close();
-            stmt.close();
-            res.close();
+            // Fecha conexões abertas.
+            DbConnection.dbClose(conn, stmt, pstm, res);
 
-            System.out.println("Menu:\n\t[1] Menu principal\n\t[0] Sair\n");
+            // Menu da seção.
+            System.out.println(line);
+            System.out.println("Menu:\n\t[1] Menu principal\n\t[0] Sair");
+            System.out.println(line);
             System.out.print("Opção: ");
-
             String option = scanner.next();
 
+            // Executa método conforme opção escolhida.
             switch (option) {
-                case "0" ->
+                case "0":
                     exitProgram();
-                case "1" -> {
+                    break;
+                case "1":
                     clearScreen();
                     mainMenu();
-                }
-                default ->
+                    break;
+                default:
                     reloadMenu();
+                    break;
             }
 
         } catch (SQLException error) {
+
+            // Tratamento de erros.
             System.out.println("Oooops! " + error.getMessage());
             System.exit(0);
         }

@@ -2,7 +2,10 @@ package net.luferat.cadastro_de_trecos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DbConnection {
 
@@ -49,15 +52,41 @@ public class DbConnection {
         return null;
     }
 
-    // Teste unitário de conexão com o banco de dados.
-    public static void main(String[] args) {
-        try {
-            Connection conn = DbConnection.dbConnect();
-            conn.close();
-        } catch (SQLException error) {
-            System.out.println("Oooops! " + error.getMessage());
-            System.exit(0);
+    // Fecha todos os recursos porventuda abertos.
+    public static void dbClose(
+            Connection conn,
+            Statement stmt,
+            PreparedStatement pstm,
+            ResultSet res
+    ) {
+        if (res != null) try {
+            res.close();
+        } catch (SQLException ignore) {
         }
+
+        if (stmt != null) try {
+            stmt.close();
+        } catch (SQLException ignore) {
+        }
+
+        if (pstm != null) try {
+            pstm.close();
+        } catch (SQLException ignore) {
+        }
+
+        if (conn != null) try {
+            conn.close();
+        } catch (SQLException ignore) {
+        }
+    }
+
+    // Teste unitário.
+    public static void main(String[] args) {
+        Connection conn = DbConnection.dbConnect();
+        if (conn != null) {
+            System.out.println("Conectou!");
+        }
+        DbConnection.dbClose(conn, null, null, null);
     }
 
 }
