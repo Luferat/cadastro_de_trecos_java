@@ -5,9 +5,16 @@
 package net.luferat.cadastro_de_trecos.gui;
 
 import java.awt.CardLayout;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import net.luferat.cadastro_de_trecos.db.DbConnection;
+import net.luferat.cadastro_de_trecos.setup.AppSetup;
 
 /**
  *
@@ -42,10 +49,17 @@ public class MainApp extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         panelListAll = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableListAll = new javax.swing.JTable();
         panelListById = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         panelCreate = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         panelEdit = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         panelDelete = new javax.swing.JPanel();
@@ -54,6 +68,7 @@ public class MainApp extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Trecos");
         setPreferredSize(new java.awt.Dimension(640, 480));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -104,7 +119,31 @@ public class MainApp extends javax.swing.JFrame {
 
         mainPanel.setLayout(new java.awt.CardLayout());
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Listar Todos");
+
+        tableListAll.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nome", "Descrição"
+            }
+        ));
+        tableListAll.setRowHeight(30);
+        tableListAll.setShowGrid(true);
+        jScrollPane1.setViewportView(tableListAll);
+        if (tableListAll.getColumnModel().getColumnCount() > 0) {
+            tableListAll.getColumnModel().getColumn(0).setMinWidth(10);
+            tableListAll.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tableListAll.getColumnModel().getColumn(0).setMaxWidth(100);
+            tableListAll.getColumnModel().getColumn(1).setMinWidth(50);
+            tableListAll.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tableListAll.getColumnModel().getColumn(1).setMaxWidth(300);
+            tableListAll.getColumnModel().getColumn(2).setMinWidth(100);
+            tableListAll.getColumnModel().getColumn(2).setPreferredWidth(500);
+            tableListAll.getColumnModel().getColumn(2).setMaxWidth(600);
+        }
 
         javax.swing.GroupLayout panelListAllLayout = new javax.swing.GroupLayout(panelListAll);
         panelListAll.setLayout(panelListAllLayout);
@@ -112,15 +151,19 @@ public class MainApp extends javax.swing.JFrame {
             panelListAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelListAllLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(746, Short.MAX_VALUE))
+                .addGroup(panelListAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panelListAllLayout.setVerticalGroup(
             panelListAllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelListAllLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(379, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         mainPanel.add(panelListAll, "cardListAll");
@@ -148,6 +191,23 @@ public class MainApp extends javax.swing.JFrame {
 
         jLabel4.setText("Cadastrar");
 
+        jLabel7.setText("Nome:");
+
+        jLabel8.setText("Descrição:");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Cadastrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelCreateLayout = new javax.swing.GroupLayout(panelCreate);
         panelCreate.setLayout(panelCreateLayout);
         panelCreateLayout.setHorizontalGroup(
@@ -155,14 +215,36 @@ public class MainApp extends javax.swing.JFrame {
             .addGroup(panelCreateLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addContainerGap(759, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelCreateLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(panelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addGroup(panelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextField1)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         panelCreateLayout.setVerticalGroup(
             panelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCreateLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addContainerGap(379, Short.MAX_VALUE))
+                .addGap(68, 68, 68)
+                .addGroup(panelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         mainPanel.add(panelCreate, "cardCreate");
@@ -248,7 +330,7 @@ public class MainApp extends javax.swing.JFrame {
                     .addComponent(btnDelete)
                     .addComponent(btnExit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -264,7 +346,6 @@ public class MainApp extends javax.swing.JFrame {
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         UIManager.put("OptionPane.yesButtonText", "Sim");
         UIManager.put("OptionPane.noButtonText", "Não");
-        UIManager.put("OptionPane.okButtonText", "OK");
         int option = JOptionPane.showConfirmDialog(
                 null,
                 "Tem certeza que deseja sair?",
@@ -295,6 +376,17 @@ public class MainApp extends javax.swing.JFrame {
         CardLayout card = (CardLayout) mainPanel.getLayout();
         card.show(mainPanel, "cardDelete");
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // SELECT
+        
+        jTextField1.setText("Mala");
+        jTextField2.setText("Coisa");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,9 +419,11 @@ public class MainApp extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainApp().setVisible(true);
+                listAll();
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreate;
@@ -338,18 +432,53 @@ public class MainApp extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnListAll;
     private javax.swing.JButton btnListById;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel panelCreate;
     private javax.swing.JPanel panelDelete;
     private javax.swing.JPanel panelEdit;
     private javax.swing.JPanel panelListAll;
     private javax.swing.JPanel panelListById;
+    private static javax.swing.JTable tableListAll;
     // End of variables declaration//GEN-END:variables
+
+    public static void listAll() {
+        try {
+            String sql = "SELECT * FROM things";
+            Connection conn = DbConnection.dbConnect();
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery(sql);
+
+            DefaultTableModel model = (DefaultTableModel) tableListAll.getModel();
+            model.setNumRows(0);
+
+            while (res.next()) {
+                model.addRow(new Object[]{
+                    res.getString("id"),
+                    res.getString("name"),
+                    res.getString("description")
+                });
+            }
+
+            DbConnection.dbClose(res, stmt, null, conn);
+
+        } catch (SQLException error) {
+            // Tratamento de erros.
+            System.out.println("Oooops! " + error.getMessage());
+            System.exit(0);
+        }
+    }
+
 }
