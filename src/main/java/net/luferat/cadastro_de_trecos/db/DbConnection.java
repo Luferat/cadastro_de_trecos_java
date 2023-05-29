@@ -16,6 +16,8 @@ public class DbConnection extends AppSetup {
         // Tratamento de erros.
         try {
 
+            Class.forName("org.sqlite.JDBC");
+
             // Conecta ao banco de dados usando o driver JDBC adequado.
             conn = DriverManager.getConnection(
                     HOSTNAME + DATABASE,
@@ -28,7 +30,7 @@ public class DbConnection extends AppSetup {
                 return conn;
             }
 
-        } catch (SQLException error) {
+        } catch (SQLException | ClassNotFoundException error) {
 
             // Tratamento de erros.
             System.out.println("Oooops! " + error.getMessage());
@@ -73,12 +75,6 @@ public class DbConnection extends AppSetup {
             }
         } catch (SQLException e) {
         }
-    }
-
-    // Teste unitário de conexão com o banco de dados.
-    public static void main(String[] args) {
-        Connection conn = DbConnection.dbConnect();
-        DbConnection.dbClose(res, stmt, pstm, conn);
     }
 
 }

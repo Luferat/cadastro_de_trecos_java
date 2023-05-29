@@ -1,1 +1,6 @@
+net\luferat\cadastro_de_trecos\crud\Delete.class
+net\luferat\cadastro_de_trecos\db\DbConnection.class
+net\luferat\cadastro_de_trecos\crud\Create.class
+net\luferat\cadastro_de_trecos\setup\AppSetup.class
+net\luferat\cadastro_de_trecos\crud\Read.class
 net\luferat\cadastro_de_trecos\Cadastro_de_trecos.class

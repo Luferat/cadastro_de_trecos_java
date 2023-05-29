@@ -23,7 +23,7 @@ public class AppSetup {
     protected static final String DATABASE = "things.db";    // Banco de dados.
     protected static final String USERNAME = "";             // Usuário do banco de dados. Não usa no MySQL.
     protected static final String PASSWORD = "";             // Senha do banco de dados. Não usa no MySQL.
-    
+
     // Tabela principal.
     protected static final String DBTABLE = "things";        // Senha do banco de dados. Não usa no MySQL.
 
