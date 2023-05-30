@@ -5,6 +5,7 @@ import net.luferat.cadastro_de_trecos.setup.AppSetup;
 import net.luferat.cadastro_de_trecos.db.DbConnection;
 import static net.luferat.cadastro_de_trecos.setup.AppSetup.*;
 import static net.luferat.cadastro_de_trecos.Cadastro_de_trecos.*;
+import static net.luferat.cadastro_de_trecos.Tools.showRes;
 
 public class Read extends AppSetup {
 

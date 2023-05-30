@@ -1,10 +1,8 @@
 package net.luferat.cadastro_de_trecos.crud;
 
 import java.sql.SQLException;
-import static net.luferat.cadastro_de_trecos.Cadastro_de_trecos.clearScreen;
-import static net.luferat.cadastro_de_trecos.Cadastro_de_trecos.exitProgram;
-import static net.luferat.cadastro_de_trecos.Cadastro_de_trecos.mainMenu;
-import static net.luferat.cadastro_de_trecos.Cadastro_de_trecos.showRes;
+import static net.luferat.cadastro_de_trecos.Cadastro_de_trecos.*;
+import static net.luferat.cadastro_de_trecos.Tools.showRes;
 import net.luferat.cadastro_de_trecos.db.DbConnection;
 import net.luferat.cadastro_de_trecos.setup.AppSetup;
 

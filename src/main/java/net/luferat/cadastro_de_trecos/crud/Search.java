@@ -5,6 +5,7 @@ import java.util.Scanner;
 import static net.luferat.cadastro_de_trecos.Cadastro_de_trecos.*;
 import net.luferat.cadastro_de_trecos.db.DbConnection;
 import net.luferat.cadastro_de_trecos.setup.AppSetup;
+import static net.luferat.cadastro_de_trecos.Tools.showRes;
 
 public class Search extends AppSetup {
 
