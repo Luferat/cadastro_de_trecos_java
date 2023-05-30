@@ -8,21 +8,24 @@ import java.util.Scanner;
 
 public class AppSetup {
 
-    // ////////////////////////////////// //
-    // Configurações de conexão com MySQL //
-    // ////////////////////////////////// //
-    protected static final String HOSTNAME = "jdbc:mysql://localhost:3306/"; // Conexão com o servidor.
-    protected static final String DATABASE = "things";                       // Banco de dados.
-    protected static final String USERNAME = "root";                         // Usuário do banco de dados.
-    protected static final String PASSWORD = "";                             // Senha do banco de dados.
+    // /////////////////////////////////////////// //
+    // Configurações de conexão com Bacos de Dados //
+    // /////////////////////////////////////////// //
     //
-    // ////////////////////////////////////// //
-    // Configurações de conexão com o SQLite. //
-    // ////////////////////////////////////// //
-    // protected static final String HOSTNAME = "jdbc:sqlite:"; // Conexão com o servidor.
-    // protected static final String DATABASE = "things.db";    // Banco de dados.
-    // protected static final String USERNAME = "";             // Usuário do banco de dados. Não usa no MySQL.
-    // protected static final String PASSWORD = "";             // Senha do banco de dados. Não usa no MySQL.
+    // String de conexão com o banco de dados SQLite
+    //                                    tipo   caminho    database
+    //                                     ↓      ↓          ↓ 
+    protected static final String SQLITEURL = "jdbc:sqlite:src/resources/things.db";
+
+    // String de conexão com o banco de dados MySQL
+    //                                   tipo    servidor  porta database   usuário       senha
+    //                                    ↓       ↓         ↓     ↓           ↓             ↓ 
+    protected static final String MYSQLURL = "jdbc:mysql://localhost:3306/things?user=root&password=";
+
+    // String de conexão com o banco de dados PostGreeSQL
+    //                                      tipo         servidor  porta database   usuário      senha
+    //                                       ↓            ↓         ↓     ↓           ↓             ↓       
+    protected static final String POSTGREEURL = "jdbc:postgresql://localhost:5432/things?user=root&password=root";
 
     // Tabela principal.
     protected static final String DBTABLE = "things";        // Senha do banco de dados. Não usa no MySQL.
