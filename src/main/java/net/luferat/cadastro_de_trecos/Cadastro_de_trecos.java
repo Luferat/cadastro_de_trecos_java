@@ -1,9 +1,12 @@
 package net.luferat.cadastro_de_trecos;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import net.luferat.cadastro_de_trecos.setup.AppSetup;
 import net.luferat.cadastro_de_trecos.crud.Read;
 import net.luferat.cadastro_de_trecos.crud.Create;
 import net.luferat.cadastro_de_trecos.crud.Delete;
+import net.luferat.cadastro_de_trecos.crud.Search;
 import net.luferat.cadastro_de_trecos.crud.Update;
 
 public class Cadastro_de_trecos extends AppSetup {
@@ -23,6 +26,7 @@ public class Cadastro_de_trecos extends AppSetup {
         System.out.println("\t[3] Novo");
         System.out.println("\t[4] Editar");
         System.out.println("\t[5] Apagar");
+        System.out.println("\t[6] Procurar");
         System.out.println("\t[0] Sair");
         System.out.println(appSep);
         System.out.print("Opção: ");
@@ -55,6 +59,10 @@ public class Cadastro_de_trecos extends AppSetup {
                 clearScreen();
                 Delete.delete();
                 break;
+            case "6":
+                clearScreen();
+                Search.search();
+                break;
             default:
                 clearScreen();
                 System.out.println("Oooops! Opção inválida!\n");
@@ -75,6 +83,22 @@ public class Cadastro_de_trecos extends AppSetup {
         for (int i = 0; i < 100; i++) {
             System.out.println("\n");
         }
+    }
+
+    public static void showRes(ResultSet res) {
+        try {
+            System.out.println(
+                    "ID: " + res.getString("id") + "\n"
+                    + "  Nome: " + res.getString("name") + "\n"
+                    + "  Descrição: " + res.getString("description") + "\n"
+            );
+        } catch (SQLException error) {
+
+            // Tratamento de erros.
+            System.out.println("Oooops! " + error.getMessage());
+            System.exit(0);
+        }
+
     }
 
 }

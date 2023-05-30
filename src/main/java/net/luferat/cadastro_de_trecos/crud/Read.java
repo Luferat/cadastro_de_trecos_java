@@ -28,15 +28,9 @@ public class Read extends AppSetup {
             res = stmt.executeQuery(sql);
             if (res.next()) {
 
-                // Se encontrou registros.
+                // Se encontrou registros, exibe na view.
                 do {
-
-                    // Exibe registro na view.
-                    System.out.println(
-                            "ID: " + res.getString("id") + "\n"
-                            + "  Nome: " + res.getString("name") + "\n"
-                            + "  Descrição: " + res.getString("description") + "\n"
-                    );
+                    showRes(res);
                 } while (res.next());
             } else {
 
@@ -112,6 +106,8 @@ public class Read extends AppSetup {
 
         try {
 
+            System.out.println(" ");
+
             // Faz consulta no banco de dados usando "preparedStatement".
             sql = "SELECT * FROM " + DBTABLE + " WHERE id = ?";
             conn = DbConnection.dbConnect();
@@ -124,13 +120,7 @@ public class Read extends AppSetup {
             res = pstm.executeQuery();
 
             if (res.next()) {
-
-                // Se tem registro, exibe na view.
-                System.out.println(
-                        "\nID: " + res.getString("id") + "\n"
-                        + "  Nome: " + res.getString("name") + "\n"
-                        + "  Descrição: " + res.getString("description") + "\n"
-                );
+                showRes(res);
             } else {
 
                 // Se não tem registro.

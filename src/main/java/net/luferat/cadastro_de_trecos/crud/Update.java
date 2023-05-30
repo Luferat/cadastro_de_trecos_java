@@ -37,6 +37,8 @@ public class Update extends AppSetup {
         }
 
         try {
+            
+            System.out.println(" ");
 
             // Obtém o registro solicitado do banco de dados.
             sql = "SELECT * FROM " + DBTABLE + " WHERE id = ?";
@@ -47,11 +49,7 @@ public class Update extends AppSetup {
             if (res.next()) {
 
                 // Se tem registro, exibe na view.
-                System.out.println(
-                        "\nID: " + res.getString("id") + "\n"
-                        + "  Nome: " + res.getString("name") + "\n"
-                        + "  Descrição: " + res.getString("description") + "\n"
-                );
+                showRes(res);
 
                 System.out.println("Insira os novos dados ou deixe em branco para manter os atuais:\n");
 
