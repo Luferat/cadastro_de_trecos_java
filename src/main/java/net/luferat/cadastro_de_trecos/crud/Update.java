@@ -61,14 +61,13 @@ public class Update extends AppSetup {
                 System.out.print("\tNome: ");
                 String itemName = keyboard.nextLine().trim();
 
-                System.out.print("\tDescription: ");
+                System.out.print("\tDescrição: ");
                 String itemDescription = keyboard.nextLine().trim();
 
                 // Pede confirmação.
                 System.out.print("\nOs dados acima estão corretos? [s/N] ");
                 if (keyboard.next().trim().toLowerCase().equals("s")) {
 
-                    // Short Hand → https://www.w3schools.com/java/java_conditions_shorthand.asp
                     String saveName = (itemName.equals("")) ? res.getString("name") : itemName;
                     String saveDescription = (itemDescription.equals("")) ? res.getString("description") : itemDescription;
 
