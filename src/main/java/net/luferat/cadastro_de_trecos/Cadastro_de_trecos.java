@@ -1,6 +1,5 @@
 package net.luferat.cadastro_de_trecos;
 
-import java.util.Scanner;
 import net.luferat.cadastro_de_trecos.setup.AppSetup;
 import net.luferat.cadastro_de_trecos.crud.Create;
 import net.luferat.cadastro_de_trecos.crud.Read;

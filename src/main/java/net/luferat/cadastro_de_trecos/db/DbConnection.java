@@ -16,24 +16,20 @@ public class DbConnection extends AppSetup {
         // Tratamento de erros.
         try {
 
-            Class.forName("org.sqlite.JDBC");
-
             // Conecta ao banco de dados usando o driver JDBC adequado.
-            conn = DriverManager.getConnection(
-                    HOSTNAME + DATABASE,
-                    USERNAME,
-                    PASSWORD
-            );
+            conn = DriverManager.getConnection(MYSQLURL);
 
             // Se a conexão foi estabelecida, retorna ela.
             if (conn != null) {
                 return conn;
+            } else {
+                System.out.println("\nOooops! Erro na conexão com banco de dados.\n");
             }
 
-        } catch (SQLException | ClassNotFoundException error) {
+        } catch (SQLException error) {
 
             // Tratamento de erros.
-            System.out.println("Oooops! " + error.getMessage());
+            System.out.println("\nOooops! " + error.getMessage() + "\n");
             System.exit(0);
         }
 
