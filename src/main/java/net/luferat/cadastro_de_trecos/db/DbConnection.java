@@ -17,21 +17,19 @@ public class DbConnection extends AppSetup {
         try {
 
             // Conecta ao banco de dados usando o driver JDBC adequado.
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/things",
-                    USERNAME,
-                    PASSWORD
-            );
+            conn = DriverManager.getConnection(MYSQLURL);
 
             // Se a conexão foi estabelecida, retorna ela.
             if (conn != null) {
                 return conn;
+            } else {
+                System.out.println("\nOooops! Erro na conexão com banco de dados.\n");
             }
 
         } catch (SQLException error) {
 
             // Tratamento de erros.
-            System.out.println("Oooops! " + error.getMessage());
+            System.out.println("\nOooops! " + error.getMessage() + "\n");
             System.exit(0);
         }
 
