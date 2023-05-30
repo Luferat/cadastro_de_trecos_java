@@ -18,7 +18,7 @@ public class DbConnection extends AppSetup {
 
             // Conecta ao banco de dados usando o driver JDBC adequado.
             conn = DriverManager.getConnection(
-                    HOSTNAME + DATABASE,
+                    "jdbc:mysql://localhost:3306/things",
                     USERNAME,
                     PASSWORD
             );
@@ -73,12 +73,6 @@ public class DbConnection extends AppSetup {
             }
         } catch (SQLException e) {
         }
-    }
-
-    // Teste unitário de conexão com o banco de dados.
-    public static void main(String[] args) {
-        Connection conn = DbConnection.dbConnect();
-        DbConnection.dbClose(res, stmt, pstm, conn);
     }
 
 }

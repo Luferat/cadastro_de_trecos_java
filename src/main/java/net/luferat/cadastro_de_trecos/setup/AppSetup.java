@@ -11,19 +11,19 @@ public class AppSetup {
     // ////////////////////////////////// //
     // Configurações de conexão com MySQL //
     // ////////////////////////////////// //
-    // private static final String HOSTNAME = "jdbc:mysql://localhost:3306/"; // Conexão com o servidor.
-    // private static final String DATABASE = "things";                       // Banco de dados.
-    // private static final String USERNAME = "root";                         // Usuário do banco de dados.
-    // private static final String PASSWORD = "";                             // Senha do banco de dados.
+    protected static final String HOSTNAME = "jdbc:mysql://localhost:3306/"; // Conexão com o servidor.
+    protected static final String DATABASE = "things";                       // Banco de dados.
+    protected static final String USERNAME = "root";                         // Usuário do banco de dados.
+    protected static final String PASSWORD = "";                             // Senha do banco de dados.
     //
     // ////////////////////////////////////// //
     // Configurações de conexão com o SQLite. //
     // ////////////////////////////////////// //
-    protected static final String HOSTNAME = "jdbc:sqlite:"; // Conexão com o servidor.
-    protected static final String DATABASE = "things.db";    // Banco de dados.
-    protected static final String USERNAME = "";             // Usuário do banco de dados. Não usa no MySQL.
-    protected static final String PASSWORD = "";             // Senha do banco de dados. Não usa no MySQL.
-    
+    // protected static final String HOSTNAME = "jdbc:sqlite:"; // Conexão com o servidor.
+    // protected static final String DATABASE = "things.db";    // Banco de dados.
+    // protected static final String USERNAME = "";             // Usuário do banco de dados. Não usa no MySQL.
+    // protected static final String PASSWORD = "";             // Senha do banco de dados. Não usa no MySQL.
+
     // Tabela principal.
     protected static final String DBTABLE = "things";        // Senha do banco de dados. Não usa no MySQL.
 
