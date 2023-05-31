@@ -4,5 +4,6 @@ net\luferat\cadastro_de_trecos\crud\Update.class
 net\luferat\cadastro_de_trecos\crud\Read.class
 net\luferat\cadastro_de_trecos\Cadastro_de_trecos.class
 net\luferat\cadastro_de_trecos\crud\Search.class
+net\luferat\cadastro_de_trecos\Tools.class
 net\luferat\cadastro_de_trecos\crud\Delete.class
 net\luferat\cadastro_de_trecos\setup\AppSetup.class
