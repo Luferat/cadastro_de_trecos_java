@@ -42,7 +42,7 @@ public class Update extends AppSetup {
             System.out.println(" ");
 
             // Obtém o registro solicitado do banco de dados.
-            sql = "SELECT * FROM " + DBTABLE + " WHERE id = ?";
+            sql = "SELECT *, DATE_FORMAT(data, '%d/%m/%Y às %H:%i') AS databr FROM " + DBTABLE + " WHERE status = '2' AND id = ?";
             conn = DbConnection.dbConnect();
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, id);
@@ -63,19 +63,25 @@ public class Update extends AppSetup {
                 System.out.print("\tDescrição: ");
                 String itemDescription = keyboard.nextLine().trim();
 
+                System.out.print("\tLocalização: ");
+                String itemLocation = keyboard.nextLine().trim();
+
                 // Pede confirmação.
                 System.out.print("\nOs dados acima estão corretos? [s/N] ");
                 if (keyboard.next().trim().toLowerCase().equals("s")) {
 
-                    String saveName = (itemName.equals("")) ? res.getString("name") : itemName;
-                    String saveDescription = (itemDescription.equals("")) ? res.getString("description") : itemDescription;
+                    // Se não preencheu, sa valores orignais.
+                    String saveName = (itemName.equals("")) ? res.getString("nome") : itemName;
+                    String saveDescription = (itemDescription.equals("")) ? res.getString("descricao") : itemDescription;
+                    String saveLocation = (itemLocation.equals("")) ? res.getString("localizacao") : itemLocation;
 
                     // Atualiza registro no banco de dados.
-                    sql = "UPDATE " + DBTABLE + " SET name = ?, description = ? WHERE id = ?";
+                    sql = "UPDATE " + DBTABLE + " SET nome = ?, descricao = ?, localizacao = ? WHERE status = '2' AND id = ?";
                     pstm = conn.prepareStatement(sql);
                     pstm.setString(1, saveName);
                     pstm.setString(2, saveDescription);
-                    pstm.setInt(3, id);
+                    pstm.setString(3, saveLocation);
+                    pstm.setInt(4, id);
                     if (pstm.executeUpdate() == 1) {
 
                         // Se o registro foi criado.

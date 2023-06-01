@@ -7,3 +7,4 @@ net\luferat\cadastro_de_trecos\crud\Search.class
 net\luferat\cadastro_de_trecos\Tools.class
 net\luferat\cadastro_de_trecos\crud\Delete.class
 net\luferat\cadastro_de_trecos\setup\AppSetup.class
+net\luferat\cadastro_de_trecos\crud\ToggleStatus.class

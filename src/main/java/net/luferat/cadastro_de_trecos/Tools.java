@@ -22,7 +22,7 @@ public class Tools {
                     viewStatus = "ATIVO";
                     break;
                 default:
-                    viewStatus = "UNDEFINED";
+                    viewStatus = "INDEFINIDO";
             }
 
             System.out.println(

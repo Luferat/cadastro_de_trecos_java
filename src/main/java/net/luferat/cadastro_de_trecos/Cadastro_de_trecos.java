@@ -1,13 +1,12 @@
 package net.luferat.cadastro_de_trecos;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import net.luferat.cadastro_de_trecos.setup.AppSetup;
 import net.luferat.cadastro_de_trecos.crud.Read;
 import net.luferat.cadastro_de_trecos.crud.Create;
 import net.luferat.cadastro_de_trecos.crud.Delete;
 import net.luferat.cadastro_de_trecos.crud.Search;
 import net.luferat.cadastro_de_trecos.crud.Update;
+import net.luferat.cadastro_de_trecos.crud.ToggleStatus;
 
 public class Cadastro_de_trecos extends AppSetup {
 
@@ -27,6 +26,7 @@ public class Cadastro_de_trecos extends AppSetup {
         System.out.println("\t[4] Editar");
         System.out.println("\t[5] Apagar");
         System.out.println("\t[6] Procurar");
+        System.out.println("\t[7] (Des)Bloquear");
         System.out.println("\t[0] Sair");
         System.out.println(appSep);
         System.out.print("Opção: ");
@@ -62,6 +62,10 @@ public class Cadastro_de_trecos extends AppSetup {
             case "6":
                 clearScreen();
                 Search.search();
+                break;
+            case "7":
+                clearScreen();
+                ToggleStatus.toggleStatus();
                 break;
             default:
                 clearScreen();

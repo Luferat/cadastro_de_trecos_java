@@ -35,11 +35,14 @@ public class Search extends AppSetup {
             // Se digitou uma string.
             try {
 
-                sql = "SELECT * FROM " + DBTABLE + " WHERE name LIKE ? OR description LIKE ?";
+                sql = "SELECT *, DATE_FORMAT(data, '%d/%m/%Y às %H:%i') AS databr FROM " + DBTABLE
+                        + " WHERE nome LIKE ? OR descricao LIKE ? OR localizacao = ? AND status != '0' "
+                        + " ORDER BY nome ASC";
                 conn = DbConnection.dbConnect();
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, "%" + searchString + "%");
                 pstm.setString(2, "%" + searchString + "%");
+                pstm.setString(3, "%" + searchString + "%");
                 res = pstm.executeQuery();
                 if (res.next()) {
 
