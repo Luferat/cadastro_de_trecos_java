@@ -41,7 +41,7 @@ public class Delete extends AppSetup {
             System.out.println(" ");
 
             // Verifica se o registro existe.
-            sql = "SELECT * FROM " + DBTABLE + " WHERE id = ?";
+            sql = "SELECT *, DATE_FORMAT(data, '%d/%m/%Y às %H:%i') AS databr FROM " + DBTABLE + " WHERE status = 2 AND id = ?";
             conn = DbConnection.dbConnect();
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, id);

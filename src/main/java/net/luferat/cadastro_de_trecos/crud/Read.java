@@ -23,7 +23,7 @@ public class Read extends AppSetup {
         try {
 
             // Consulta o banco de dados.
-            sql = "SELECT * FROM " + DBTABLE;
+            sql = "SELECT *, DATE_FORMAT(data, '%d/%m/%Y às %H:%i') AS databr FROM " + DBTABLE + " WHERE status != '0' ORDER BY nome";
             conn = DbConnection.dbConnect();
             stmt = conn.createStatement();
             res = stmt.executeQuery(sql);
@@ -110,7 +110,7 @@ public class Read extends AppSetup {
             System.out.println(" ");
 
             // Faz consulta no banco de dados usando "preparedStatement".
-            sql = "SELECT * FROM " + DBTABLE + " WHERE id = ?";
+            sql = "SELECT *, DATE_FORMAT(data, '%d/%m/%Y às %H:%i') AS databr FROM " + DBTABLE + " WHERE status != '0' AND id = ?";
             conn = DbConnection.dbConnect();
             pstm = conn.prepareStatement(sql);
 
