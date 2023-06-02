@@ -2,10 +2,10 @@ package net.luferat.cadastro_de_trecos.crud;
 
 import java.sql.SQLException;
 import java.util.Scanner;
-import static net.luferat.cadastro_de_trecos.Cadastro_de_trecos.*;
+import static net.luferat.cadastro_de_trecos.Main.*;
 import net.luferat.cadastro_de_trecos.db.DbConnection;
 import net.luferat.cadastro_de_trecos.setup.AppSetup;
-import static net.luferat.cadastro_de_trecos.Tools.showRes;
+import static net.luferat.cadastro_de_trecos.Tools.*;
 
 public class Update extends AppSetup {
 

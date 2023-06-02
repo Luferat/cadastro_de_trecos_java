@@ -2,8 +2,9 @@ package net.luferat.cadastro_de_trecos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import net.luferat.cadastro_de_trecos.setup.AppSetup;
 
-public class Tools {
+public class Tools extends AppSetup {
 
     public static void showRes(ResultSet res) {
 
@@ -41,6 +42,21 @@ public class Tools {
             System.exit(0);
         }
 
+    }
+
+    // Encerra o programa.
+    public static void exitProgram() {
+        scanner.close();
+        clearScreen();
+        System.out.println("\n\nFui!\n\n");
+        System.exit(0);
+    }
+
+    // Limpa a tela do terminal.
+    public static void clearScreen() {
+        for (int i = 0; i < 100; i++) {
+            System.out.println("\n");
+        }
     }
 
 }

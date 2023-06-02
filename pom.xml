@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
-        <exec.mainClass>net.luferat.cadastro_de_trecos.Cadastro_de_trecos</exec.mainClass>
+        <exec.mainClass>net.luferat.cadastro_de_trecos.Main</exec.mainClass>
     </properties>
     <dependencies>
         <dependency>
@@ -30,7 +30,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>net.luferat.cadastro_de_trecos.Cadastro_de_trecos</mainClass>
+                            <mainClass>net.luferat.cadastro_de_trecos.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -2,7 +2,8 @@ package net.luferat.cadastro_de_trecos.crud;
 
 import java.sql.SQLException;
 import java.util.Scanner;
-import static net.luferat.cadastro_de_trecos.Cadastro_de_trecos.*;
+import static net.luferat.cadastro_de_trecos.Main.*;
+import static net.luferat.cadastro_de_trecos.Tools.*;
 import net.luferat.cadastro_de_trecos.db.DbConnection;
 import net.luferat.cadastro_de_trecos.setup.AppSetup;
 
@@ -32,7 +33,7 @@ public class Create extends AppSetup {
             String itemDescription = keyboard.nextLine().trim();
 
             // Obtém a descrição.
-            System.out.print("\nLocalização: ");
+            System.out.print("\tLocalização: ");
             String itemLocation = keyboard.nextLine().trim();
 
             // Pede confirmação.

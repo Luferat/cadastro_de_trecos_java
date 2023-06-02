@@ -1,5 +1,6 @@
 package net.luferat.cadastro_de_trecos;
 
+import static net.luferat.cadastro_de_trecos.Tools.*;
 import net.luferat.cadastro_de_trecos.setup.AppSetup;
 import net.luferat.cadastro_de_trecos.crud.Read;
 import net.luferat.cadastro_de_trecos.crud.Create;
@@ -8,7 +9,7 @@ import net.luferat.cadastro_de_trecos.crud.Search;
 import net.luferat.cadastro_de_trecos.crud.Update;
 import net.luferat.cadastro_de_trecos.crud.ToggleStatus;
 
-public class Cadastro_de_trecos extends AppSetup {
+public class Main extends AppSetup {
 
     public static void main(String[] args) {
         clearScreen();
@@ -71,21 +72,6 @@ public class Cadastro_de_trecos extends AppSetup {
                 clearScreen();
                 System.out.println("Oooops! Opção inválida!\n");
                 mainMenu();
-        }
-    }
-
-    // Encerra o programa.
-    public static void exitProgram() {
-        scanner.close();
-        clearScreen();
-        System.out.println("\n\nFui!\n\n");
-        System.exit(0);
-    }
-
-    // Limpa a tela do terminal.
-    public static void clearScreen() {
-        for (int i = 0; i < 100; i++) {
-            System.out.println("\n");
         }
     }
 
