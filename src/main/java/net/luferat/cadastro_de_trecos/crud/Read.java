@@ -118,7 +118,7 @@ public class Read extends AppSetup {
             pstm.setInt(1, id);
 
             // Executa a query.
-            res = pstm.executeQuery();
+           
 
             if (res.next()) {
                 showRes(res);
